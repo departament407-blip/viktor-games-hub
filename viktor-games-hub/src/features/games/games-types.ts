@@ -6,9 +6,12 @@ export interface Game {
   slug: string;
   title: string;
   description: string;
-  playUrl: string;
+  playUrl?: string;
   status: GameStatus;
   detailsUrl?: string;
+  coverImage?: string;
+  coverAlt?: string;
+  featured?: boolean;
   tags?: string[];
 }
 

@@ -1,0 +1,7 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Viktor Games Lab touch icon">
+  <rect width="180" height="180" rx="36" fill="#080c0b"/>
+  <rect x="18" y="18" width="144" height="144" rx="28" stroke="#ffc857" stroke-opacity="0.45" stroke-width="6"/>
+  <path d="M52 45L84 136H101L134 45H112L92 105L73 45H52Z" fill="#ffc857"/>
+  <path d="M34 142H82M142 34V82" stroke="#69d6a9" stroke-opacity="0.5" stroke-width="8" stroke-linecap="round"/>
+  <path d="M124 126L136 148H112L124 126Z" fill="#ff734d"/>
+</svg>
