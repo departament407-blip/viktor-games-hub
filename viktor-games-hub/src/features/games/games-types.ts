@@ -9,9 +9,13 @@ export interface Game {
   playUrl?: string;
   status: GameStatus;
   detailsUrl?: string;
+  iconImage?: string;
   coverImage?: string;
+  heroImage?: string;
+  cardPreviewImage?: string;
   coverAlt?: string;
   featured?: boolean;
+  screenshots?: string[];
   tags?: string[];
 }
 

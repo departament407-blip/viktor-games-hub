@@ -28,13 +28,11 @@ export function SiteHeader({
     <header className="relative z-20 px-[clamp(16px,4vw,56px)] py-4 sm:py-5">
       <div className="mx-auto flex w-full max-w-[1180px] flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
         <a className="flex min-w-0 items-center gap-3 text-paper no-underline" href="/" aria-label={brandAriaLabel}>
-          <span className="grid size-11 shrink-0 place-items-center rounded-lg border border-paper/25 bg-ink/75 text-base font-black text-amber shadow-lab">
-            V
-          </span>
-          <span className="min-w-0">
-            <span className="block text-sm font-black leading-tight sm:text-base">Viktor Games Lab</span>
-            <span className="block text-xs font-bold leading-tight text-paper/55 sm:text-sm">browser games hub</span>
-          </span>
+          <img
+            className="h-12 w-[165px] shrink-0 object-contain object-left sm:h-14 sm:w-[190px]"
+            src="/assets/brand/logo.svg"
+            alt="Viktor Games Lab"
+          />
         </a>
 
         <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-end sm:gap-5">

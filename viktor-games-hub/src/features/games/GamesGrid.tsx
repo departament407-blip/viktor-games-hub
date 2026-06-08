@@ -45,10 +45,10 @@ function GameCard({ game, labels }: { game: Game; labels: GamesGridProps["labels
       id={game.slug}
     >
       <div className="relative aspect-[16/9] overflow-hidden bg-ink-soft">
-        {game.coverImage ? (
+        {game.cardPreviewImage ?? game.coverImage ? (
           <img
             className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
-            src={game.coverImage}
+            src={game.cardPreviewImage ?? game.coverImage}
             alt={game.coverAlt ?? game.title}
           />
         ) : (
@@ -73,9 +73,19 @@ function GameCard({ game, labels }: { game: Game; labels: GamesGridProps["labels
       </div>
 
       <div className="flex flex-1 flex-col gap-4 p-5">
-        <div>
-          <p className="m-0 text-xs font-black uppercase text-paper/45">{game.slug}</p>
-          <h3 className="m-0 mt-2 text-2xl font-black leading-tight tracking-normal">{game.title}</h3>
+        <div className="flex items-start gap-3">
+          {game.iconImage ? (
+            <img
+              className="size-12 shrink-0 rounded-lg border border-paper/15 bg-ink object-cover"
+              src={game.iconImage}
+              alt=""
+              aria-hidden="true"
+            />
+          ) : null}
+          <div className="min-w-0">
+            <p className="m-0 text-xs font-black uppercase text-paper/45">{game.slug}</p>
+            <h3 className="m-0 mt-2 text-2xl font-black leading-tight tracking-normal">{game.title}</h3>
+          </div>
         </div>
         <p className="m-0 flex-1 leading-relaxed text-paper/72">{game.description}</p>
 

@@ -17,7 +17,7 @@ interface GamesState {
   isLoading: boolean;
 }
 
-const socialPreviewImage = "/assets/social-preview.svg";
+const socialPreviewImage = "/assets/brand/og-image.png";
 
 export function App() {
   const [locale, setLocale] = useState<Locale>("ru");
@@ -150,11 +150,15 @@ function enrichGameWithLocalAssets(game: Game): Game {
   return {
     ...fallbackGames[0],
     ...game,
+    cardPreviewImage: game.cardPreviewImage ?? fallbackGames[0].cardPreviewImage,
     coverAlt: game.coverAlt ?? fallbackGames[0].coverAlt,
     coverImage: game.coverImage ?? fallbackGames[0].coverImage,
     detailsUrl: game.detailsUrl ?? fallbackGames[0].detailsUrl,
     featured: game.featured ?? fallbackGames[0].featured,
+    heroImage: game.heroImage ?? fallbackGames[0].heroImage,
+    iconImage: game.iconImage ?? fallbackGames[0].iconImage,
     playUrl: game.playUrl ?? fallbackGames[0].playUrl,
+    screenshots: game.screenshots ?? fallbackGames[0].screenshots,
     tags: game.tags ?? fallbackGames[0].tags,
   };
 }

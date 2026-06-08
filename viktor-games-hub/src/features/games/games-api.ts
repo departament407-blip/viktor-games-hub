@@ -55,9 +55,13 @@ function normalizeGame(game: Game): Game {
     playUrl: game.playUrl,
     status: game.status,
     detailsUrl: game.detailsUrl,
+    iconImage: game.iconImage,
     coverImage: game.coverImage,
+    heroImage: game.heroImage,
+    cardPreviewImage: game.cardPreviewImage,
     coverAlt: game.coverAlt,
     featured: game.featured,
+    screenshots: game.screenshots,
     tags: game.tags,
   };
 }
@@ -74,9 +78,13 @@ function isGame(value: unknown): value is Game {
     (value.playUrl === undefined || typeof value.playUrl === "string") &&
     isGameStatus(value.status) &&
     (value.detailsUrl === undefined || typeof value.detailsUrl === "string") &&
+    (value.iconImage === undefined || typeof value.iconImage === "string") &&
     (value.coverImage === undefined || typeof value.coverImage === "string") &&
+    (value.heroImage === undefined || typeof value.heroImage === "string") &&
+    (value.cardPreviewImage === undefined || typeof value.cardPreviewImage === "string") &&
     (value.coverAlt === undefined || typeof value.coverAlt === "string") &&
     (value.featured === undefined || typeof value.featured === "boolean") &&
+    (value.screenshots === undefined || isStringArray(value.screenshots)) &&
     (value.tags === undefined || isStringArray(value.tags))
   );
 }

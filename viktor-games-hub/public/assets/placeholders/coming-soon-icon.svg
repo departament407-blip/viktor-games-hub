@@ -1,0 +1,6 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coming soon game icon">
+  <rect width="256" height="256" rx="42" fill="#080c0b"/>
+  <rect x="24" y="24" width="208" height="208" rx="32" stroke="#ffc857" stroke-opacity="0.42" stroke-width="6"/>
+  <path d="M128 62L178 158H78L128 62Z" fill="#ffc857"/>
+  <rect x="66" y="176" width="128" height="18" rx="9" fill="#69d6a9" fill-opacity="0.55"/>
+</svg>

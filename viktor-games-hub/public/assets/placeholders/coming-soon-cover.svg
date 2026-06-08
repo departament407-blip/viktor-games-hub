@@ -1,0 +1,28 @@
+<svg width="960" height="560" viewBox="0 0 960 560" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Coming soon game cover placeholder</title>
+  <desc id="desc">Dark grid game cover placeholder with warning accents.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#080c0b"/>
+      <stop offset="0.55" stop-color="#151d18"/>
+      <stop offset="1" stop-color="#2a150c"/>
+    </linearGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0V44" stroke="#69d6a9" stroke-opacity="0.08"/>
+    </pattern>
+  </defs>
+  <rect width="960" height="560" fill="url(#bg)"/>
+  <rect width="960" height="560" fill="url(#grid)"/>
+  <rect x="94" y="84" width="768" height="392" rx="28" fill="#080c0b" fill-opacity="0.45" stroke="#ffc857" stroke-opacity="0.28" stroke-width="2"/>
+  <g transform="translate(236 156)">
+    <rect width="104" height="82" rx="12" fill="#26332e" stroke="#69d6a9" stroke-opacity="0.22"/>
+    <rect x="120" width="104" height="82" rx="12" fill="#151d18" stroke="#fff6e5" stroke-opacity="0.1"/>
+    <rect x="240" width="104" height="82" rx="12" fill="#3d2418" stroke="#ffc857" stroke-opacity="0.42"/>
+    <rect x="360" width="104" height="82" rx="12" fill="#26332e" stroke="#69d6a9" stroke-opacity="0.22"/>
+    <rect y="98" width="104" height="82" rx="12" fill="#151d18" stroke="#fff6e5" stroke-opacity="0.1"/>
+    <rect x="120" y="98" width="104" height="82" rx="12" fill="#26332e" stroke="#69d6a9" stroke-opacity="0.22"/>
+    <rect x="240" y="98" width="104" height="82" rx="12" fill="#151d18" stroke="#fff6e5" stroke-opacity="0.1"/>
+    <rect x="360" y="98" width="104" height="82" rx="12" fill="#3d2418" stroke="#ffc857" stroke-opacity="0.42"/>
+  </g>
+  <text x="480" y="394" fill="#ffc857" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="900" text-anchor="middle" letter-spacing="3">COMING SOON</text>
+</svg>

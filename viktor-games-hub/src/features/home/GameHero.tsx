@@ -72,7 +72,7 @@ export function GameHero({ copy, featuredGame, labels }: GameHeroProps) {
           <div className="relative overflow-hidden rounded-2xl border border-amber/30 bg-ink-soft shadow-lab">
             <img
               className="aspect-[16/10] w-full object-cover"
-              src={featuredGame.coverImage}
+              src={featuredGame.heroImage ?? featuredGame.coverImage}
               alt={featuredGame.coverAlt ?? featuredGame.title}
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/70 to-transparent p-4 sm:p-6">
