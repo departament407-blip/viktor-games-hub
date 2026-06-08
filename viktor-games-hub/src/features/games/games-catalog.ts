@@ -1,6 +1,7 @@
 import type { Game } from "./games-types";
 
 const saperAssetsBase = "/assets/games/saper-last-mistake";
+const placeholdersBase = "/assets/placeholders";
 
 export const gamesCatalog: Game[] = [
   {
@@ -22,5 +23,38 @@ export const gamesCatalog: Game[] = [
       `${saperAssetsBase}/screenshots/screenshot-03.png`,
     ],
     tags: ["Тактика", "Сапёр", "Sci-fi", "Браузерная игра"],
+  },
+];
+
+export const upcomingGames: Game[] = [
+  {
+    slug: "operation-blackout",
+    title: "Операция: Blackout",
+    description: "Короткая тактическая головоломка про энергию, риск и решения под давлением.",
+    playUrl: undefined,
+    status: "planned",
+    detailsUrl: "#about-lab",
+    iconImage: `${placeholdersBase}/coming-soon-icon.svg`,
+    coverImage: `${placeholdersBase}/coming-soon-cover.svg`,
+    heroImage: `${placeholdersBase}/coming-soon-cover.svg`,
+    cardPreviewImage: `${placeholdersBase}/coming-soon-cover.svg`,
+    coverAlt: "Временная обложка игры, которая скоро появится",
+    screenshots: [],
+    tags: ["Coming soon", "Puzzle", "Tactical"],
+  },
+  {
+    slug: "biome-runner",
+    title: "Biome Runner",
+    description: "Survival-эксперимент с биомами, маршрутами и быстрыми браузерными забегами.",
+    playUrl: undefined,
+    status: "prototype",
+    detailsUrl: "#about-lab",
+    iconImage: `${placeholdersBase}/coming-soon-icon.svg`,
+    coverImage: `${placeholdersBase}/coming-soon-cover.svg`,
+    heroImage: `${placeholdersBase}/coming-soon-cover.svg`,
+    cardPreviewImage: `${placeholdersBase}/coming-soon-cover.svg`,
+    coverAlt: "Временная обложка прототипа игры",
+    screenshots: [],
+    tags: ["Prototype", "Survival", "Browser"],
   },
 ];

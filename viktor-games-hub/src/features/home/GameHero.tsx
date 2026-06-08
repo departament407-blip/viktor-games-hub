@@ -1,4 +1,4 @@
-import type { GamesUiLabels } from "../../app/i18n";
+import type { GamesUiLabels } from "../../shared/config/site-content";
 import type { Game } from "../games/games-types";
 
 interface GameHeroProps {
@@ -10,6 +10,7 @@ interface GameHeroProps {
     browseCatalog: string;
     statGames: string;
     statBuilds: string;
+    deployLabel: string;
   };
   featuredGame: Game;
   labels: GamesUiLabels;
@@ -61,7 +62,7 @@ export function GameHero({ copy, featuredGame, labels }: GameHeroProps) {
               <dd className="m-0 mt-1 font-black text-amber">{copy.statGames}</dd>
             </div>
             <div className="rounded-lg border border-paper/12 bg-paper/[0.06] p-3">
-              <dt className="text-paper/55">deploy</dt>
+              <dt className="text-paper/55">{copy.deployLabel}</dt>
               <dd className="m-0 mt-1 font-black text-mint">{copy.statBuilds}</dd>
             </div>
           </dl>

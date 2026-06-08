@@ -1,4 +1,4 @@
-import type { Locale } from "../../app/i18n";
+import type { Locale } from "../config/site-content";
 
 interface LanguageToggleProps {
   activeLocale: Locale;

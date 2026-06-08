@@ -65,6 +65,44 @@ RAILWAY_ENVIRONMENT
 
 `RAILWAY_SERVICE` нужен, если в Railway-проекте несколько сервисов. `RAILWAY_ENVIRONMENT` нужен, если нужно явно выбрать окружение.
 
+## How to edit content
+
+Основные тексты сайта вынесены в `src/shared/config/site-content.ts`.
+Там можно менять:
+
+- название сайта: `siteName`;
+- hero-заголовок: `heroTitle`;
+- описание hero: `heroDescription`;
+- текст главной кнопки: `primaryButtonText`;
+- заголовок каталога: `catalogTitle`;
+- заголовок и описание блока About: `aboutTitle`, `aboutDescription`;
+- текст футера: `footerText`;
+- SEO-тексты: `seoTitle`, `seoDescription`;
+- подписи кнопок, статусов, навигации и футера.
+
+Каталог игр редактируется в `src/features/games/games-catalog.ts`.
+Там меняются:
+
+- название и описание игры: `title`, `description`;
+- ссылка на игру: `playUrl`;
+- ссылка "Подробнее": `detailsUrl`;
+- статус: `status`;
+- жанры и теги: `tags`;
+- пути к картинкам: `coverImage`, `iconImage`, `heroImage`, `screenshots`.
+
+Ассеты лежат в `public/assets`. Для Сапёра используются файлы из `public/assets/games/saper-last-mistake`.
+
+После изменения текстов, ссылок или картинок выполните:
+
+```bash
+npm run build
+git add .
+git commit -m "Update site content"
+git push
+```
+
+Railway сейчас деплоит ветку `master`, поэтому для обычной работы создавайте отдельную ветку и открывайте Pull Request в `master`. Прямой push в `master` сразу уйдёт в production.
+
 ## How to replace images
 
 Все публичные ассеты лежат в `public/assets`.
@@ -105,6 +143,8 @@ git add .
 git commit -m "Update game assets"
 git push
 ```
+
+Если Railway подключён к `master`, пушьте изменения в feature-ветку и мержите через Pull Request.
 
 ## Будущий API `/api/games`
 
