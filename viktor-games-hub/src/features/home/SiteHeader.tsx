@@ -1,4 +1,4 @@
-import type { Locale } from "../../app/i18n";
+import type { Locale } from "../../shared/config/site-content";
 import { LanguageToggle } from "../../shared/ui/LanguageToggle";
 
 interface SiteHeaderProps {
@@ -13,6 +13,7 @@ interface SiteHeaderProps {
   };
   navAriaLabel: string;
   onLocaleChange: (locale: Locale) => void;
+  siteName: string;
 }
 
 export function SiteHeader({
@@ -23,6 +24,7 @@ export function SiteHeader({
   nav,
   navAriaLabel,
   onLocaleChange,
+  siteName,
 }: SiteHeaderProps) {
   return (
     <header className="relative z-20 px-[clamp(16px,4vw,56px)] py-4 sm:py-5">
@@ -31,7 +33,7 @@ export function SiteHeader({
           <img
             className="h-12 w-[165px] shrink-0 object-contain object-left sm:h-14 sm:w-[190px]"
             src="/assets/brand/logo.svg"
-            alt="Viktor Games Lab"
+            alt={siteName}
           />
         </a>
 

@@ -3,12 +3,12 @@ import { FeaturedGame } from "../features/games/components/FeaturedGame";
 import { GamesGrid } from "../features/games/GamesGrid";
 import { fallbackGames } from "../features/games/fallback-games";
 import { loadGamesCatalog } from "../features/games/games-api";
+import { upcomingGames } from "../features/games/games-catalog";
 import type { Game, GamesCatalogSource } from "../features/games/games-types";
-import { upcomingGames } from "../features/games/upcoming-games";
 import { AboutLab } from "../features/home/AboutLab";
 import { GameHero } from "../features/home/GameHero";
 import { SiteHeader } from "../features/home/SiteHeader";
-import { appCopy, locales, type Locale } from "./i18n";
+import { locales, siteContentByLocale, type Locale } from "../shared/config/site-content";
 import { useDocumentMeta } from "./useDocumentMeta";
 
 interface GamesState {
@@ -26,7 +26,8 @@ export function App() {
     source: "fallback",
     isLoading: true,
   });
-  const copy = appCopy[locale];
+  const content = siteContentByLocale[locale];
+  const gameLabels = content.gameLabels;
 
   useEffect(() => {
     let isMounted = true;
@@ -49,13 +50,13 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    document.documentElement.lang = copy.htmlLang;
+    document.documentElement.lang = content.htmlLang;
     useDocumentMeta({
-      description: copy.metaDescription,
+      description: content.seoDescription,
       image: socialPreviewImage,
-      title: copy.title,
+      title: content.seoTitle,
     });
-  }, [copy.htmlLang, copy.metaDescription, copy.title]);
+  }, [content.htmlLang, content.seoDescription, content.seoTitle]);
 
   const publishedGames = useMemo(
     () => gamesState.games.map((game) => enrichGameWithLocalAssets(game)),
@@ -70,25 +71,37 @@ export function App() {
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(105,214,169,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(105,214,169,0.05)_1px,transparent_1px)] bg-[length:38px_38px]" />
         <SiteHeader
           activeLocale={locale}
-          brandAriaLabel={copy.brandAriaLabel}
-          languageAriaLabel={copy.languageAriaLabel}
+          brandAriaLabel={content.brandAriaLabel}
+          languageAriaLabel={content.languageAriaLabel}
           locales={locales}
-          nav={copy.nav}
-          navAriaLabel={copy.navAriaLabel}
+          nav={content.nav}
+          navAriaLabel={content.navAriaLabel}
           onLocaleChange={setLocale}
+          siteName={content.siteName}
         />
-        <GameHero copy={copy.hero} featuredGame={featuredGame} labels={copy.gamesGrid} />
+        <GameHero
+          copy={{
+            browseCatalog: content.secondaryButtonText,
+            deployLabel: content.heroDeployLabel,
+            eyebrow: content.heroEyebrow,
+            lead: content.heroDescription,
+            playFeatured: content.primaryButtonText,
+            statBuilds: content.heroStatBuilds,
+            statGames: content.heroStatGames,
+            title: content.heroTitle,
+          }}
+          featuredGame={featuredGame}
+          labels={gameLabels}
+        />
       </div>
 
       <FeaturedGame
-        apiNote={copy.featured.api}
-        eyebrow={copy.featured.eyebrow}
-        fallbackNote={copy.featured.fallback}
+        apiNote={content.apiCatalogNote}
+        eyebrow={content.featuredEyebrow}
+        fallbackNote={content.fallbackCatalogNote}
         game={featuredGame}
-        labels={copy.gamesGrid}
+        labels={gameLabels}
         source={gamesState.source}
-        text={copy.featured.text}
-        title={copy.featured.title}
       />
 
       <section
@@ -98,31 +111,41 @@ export function App() {
       >
         <div className="mx-auto w-full max-w-[1180px]">
           <div className="mb-7 max-w-[760px] sm:mb-9">
-            <p className="mb-3 text-xs font-extrabold uppercase tracking-normal text-mint">{copy.catalog.eyebrow}</p>
+            <p className="mb-3 text-xs font-extrabold uppercase tracking-normal text-mint">{content.catalogEyebrow}</p>
             <h2
               className="m-0 text-3xl font-black leading-none tracking-normal sm:text-5xl"
               id="games-catalog-title"
             >
-              {copy.catalog.title}
+              {content.catalogTitle}
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-paper/68 sm:text-lg">{copy.catalog.text}</p>
+            <p className="mt-4 text-base leading-relaxed text-paper/68 sm:text-lg">{content.catalogDescription}</p>
           </div>
 
-          <GamesGrid games={catalogGames} isLoading={gamesState.isLoading} labels={copy.gamesGrid} />
+          <GamesGrid games={catalogGames} isLoading={gamesState.isLoading} labels={gameLabels} />
         </div>
       </section>
 
-      <AboutLab copy={copy.about} />
+      <AboutLab
+        copy={{
+          eyebrow: content.aboutEyebrow,
+          process: content.process,
+          processTitle: content.processTitle,
+          stack: content.stack,
+          stackTitle: content.stackTitle,
+          text: content.aboutDescription,
+          title: content.aboutTitle,
+        }}
+      />
 
       <footer className="bg-ink px-[clamp(16px,4vw,56px)] py-8 text-paper/65">
         <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <strong className="block text-paper">Viktor Games Lab</strong>
-            <span className="mt-1 block text-sm">{copy.footer.tagline}</span>
+            <strong className="block text-paper">{content.siteName}</strong>
+            <span className="mt-1 block text-sm">{content.footerText}</span>
           </div>
           <div className="flex flex-wrap gap-4 text-sm font-black">
             <a className="text-paper/75 no-underline hover:text-amber" href="https://railway.com" rel="noreferrer" target="_blank">
-              {copy.footer.railway}
+              {content.footerRailway}
             </a>
             <a
               className="text-paper/75 no-underline hover:text-amber"
@@ -130,10 +153,10 @@ export function App() {
               rel="noreferrer"
               target="_blank"
             >
-              {copy.footer.github}
+              {content.footerGithub}
             </a>
             <a className="text-paper/75 no-underline hover:text-amber" href="#hero-title">
-              {copy.footer.backToTop}
+              {content.footerBackToTop}
             </a>
           </div>
         </div>
