@@ -1,4 +1,4 @@
-export type GameStatus = "published" | "development" | "prototype" | "planned";
+export type GameStatus = "published" | "alpha" | "development" | "prototype" | "planned";
 
 export type GamesCatalogSource = "api" | "fallback";
 

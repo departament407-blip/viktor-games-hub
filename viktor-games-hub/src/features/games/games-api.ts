@@ -3,7 +3,7 @@ import type { Game, GamesCatalogResult, GameStatus } from "./games-types";
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "") ?? "";
 const gamesEndpoint = `${apiBaseUrl}/api/games`;
-const supportedStatuses: GameStatus[] = ["published", "development", "prototype", "planned"];
+const supportedStatuses: GameStatus[] = ["published", "alpha", "development", "prototype", "planned"];
 
 export async function loadGamesCatalog(): Promise<GamesCatalogResult> {
   try {
@@ -16,6 +16,10 @@ export async function loadGamesCatalog(): Promise<GamesCatalogResult> {
 
     if (!response.ok) {
       throw new Error(`Games API returned ${response.status}`);
+    }
+
+    if (!response.headers.get("content-type")?.includes("json")) {
+      return { games: fallbackGames, source: "fallback" };
     }
 
     const payload: unknown = await response.json();

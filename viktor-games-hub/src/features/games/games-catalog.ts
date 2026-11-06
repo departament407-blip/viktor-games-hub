@@ -1,7 +1,6 @@
 import type { Game } from "./games-types";
 
 const saperAssetsBase = "/assets/games/saper-last-mistake";
-const placeholdersBase = "/assets/placeholders";
 
 export const gamesCatalog: Game[] = [
   {
@@ -10,7 +9,6 @@ export const gamesCatalog: Game[] = [
     description: "Тактический браузерный сапёр с оперативниками, HP, перками и биомами.",
     playUrl: "https://game-saper-last-mistake-production.up.railway.app/",
     status: "published",
-    detailsUrl: "#saper-last-mistake",
     iconImage: `${saperAssetsBase}/icon.png`,
     coverImage: `${saperAssetsBase}/cover.png`,
     heroImage: `${saperAssetsBase}/hero.png`,
@@ -24,37 +22,26 @@ export const gamesCatalog: Game[] = [
     ],
     tags: ["Тактика", "Сапёр", "Sci-fi", "Браузерная игра"],
   },
+  {
+    slug: "pirate-tabletop",
+    title: "Pirate Tabletop",
+    description: "Открывай остров клетка за клеткой и доставляй золото на корабль. Играй с друзьями по коду комнаты или против 1–3 ботов.",
+    playUrl: "https://game-backend-production-550d.up.railway.app/",
+    status: "alpha",
+    cardPreviewImage: "/assets/games/pirate-tabletop/board.webp",
+    coverAlt: "Игровое поле Pirate Tabletop с открытыми тайлами острова",
+    tags: ["Настольная стратегия", "Онлайн", "Соло"],
+  },
 ];
 
 export const upcomingGames: Game[] = [
   {
-    slug: "operation-blackout",
-    title: "Операция: Blackout",
-    description: "Короткая тактическая головоломка про энергию, риск и решения под давлением.",
-    playUrl: undefined,
-    status: "planned",
-    detailsUrl: "#about-lab",
-    iconImage: `${placeholdersBase}/coming-soon-icon.svg`,
-    coverImage: `${placeholdersBase}/coming-soon-cover.svg`,
-    heroImage: `${placeholdersBase}/coming-soon-cover.svg`,
-    cardPreviewImage: `${placeholdersBase}/coming-soon-cover.svg`,
-    coverAlt: "Временная обложка игры, которая скоро появится",
-    screenshots: [],
-    tags: ["Coming soon", "Puzzle", "Tactical"],
-  },
-  {
-    slug: "biome-runner",
-    title: "Biome Runner",
-    description: "Survival-эксперимент с биомами, маршрутами и быстрыми браузерными забегами.",
-    playUrl: undefined,
+    slug: "vlastitel-galaktiki",
+    title: "Властитель Галактики",
+    description: "В прототипе космической RTS материнский корабль отправляет приказы зонду. Чем дальше зонд, тем позже приходит ответ. Сейчас это прототип для Windows.",
     status: "prototype",
-    detailsUrl: "#about-lab",
-    iconImage: `${placeholdersBase}/coming-soon-icon.svg`,
-    coverImage: `${placeholdersBase}/coming-soon-cover.svg`,
-    heroImage: `${placeholdersBase}/coming-soon-cover.svg`,
-    cardPreviewImage: `${placeholdersBase}/coming-soon-cover.svg`,
-    coverAlt: "Временная обложка прототипа игры",
-    screenshots: [],
-    tags: ["Prototype", "Survival", "Browser"],
+    cardPreviewImage: "/assets/games/vlastitel-galaktiki/sector.svg",
+    coverAlt: "Схема маршрута и связи с зондом",
+    tags: ["Космическая RTS", "Windows"],
   },
 ];

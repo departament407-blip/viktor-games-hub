@@ -9,6 +9,7 @@ interface GameHeroProps {
     playFeatured: string;
     browseCatalog: string;
     statGames: string;
+    playableLabel: string;
     statBuilds: string;
     deployLabel: string;
   };
@@ -58,7 +59,7 @@ export function GameHero({ copy, featuredGame, labels }: GameHeroProps) {
 
           <dl className="mt-7 grid grid-cols-2 gap-3 text-sm sm:max-w-[440px]">
             <div className="rounded-lg border border-paper/12 bg-paper/[0.06] p-3">
-              <dt className="text-paper/55">{labels.statusLabels[featuredGame.status]}</dt>
+              <dt className="text-paper/55">{copy.playableLabel}</dt>
               <dd className="m-0 mt-1 font-black text-amber">{copy.statGames}</dd>
             </div>
             <div className="rounded-lg border border-paper/12 bg-paper/[0.06] p-3">
