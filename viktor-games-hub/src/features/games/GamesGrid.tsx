@@ -83,7 +83,6 @@ function GameCard({ game, labels }: { game: Game; labels: GamesGridProps["labels
             />
           ) : null}
           <div className="min-w-0">
-            <p className="m-0 text-xs font-black uppercase text-paper/45">{game.slug}</p>
             <h3 className="m-0 mt-2 text-2xl font-black leading-tight tracking-normal">{game.title}</h3>
           </div>
         </div>
@@ -112,17 +111,15 @@ function GameCard({ game, labels }: { game: Game; labels: GamesGridProps["labels
             >
               {labels.play}
             </a>
-          ) : (
-            <span className="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-paper/15 bg-paper/10 px-[18px] text-[0.96rem] font-extrabold text-paper/50 sm:w-auto">
-              {labels.unavailable}
-            </span>
+          ) : null}
+          {game.detailsUrl && (
+            <a
+              className="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-paper/20 bg-paper/10 px-[18px] text-[0.96rem] font-extrabold text-paper no-underline transition hover:-translate-y-0.5 focus-visible:-translate-y-0.5 sm:w-auto"
+              href={game.detailsUrl}
+            >
+              {labels.details}
+            </a>
           )}
-          <a
-            className="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-paper/20 bg-paper/10 px-[18px] text-[0.96rem] font-extrabold text-paper no-underline transition hover:-translate-y-0.5 focus-visible:-translate-y-0.5 sm:w-auto"
-            href={game.detailsUrl ?? "#about-lab"}
-          >
-            {labels.details}
-          </a>
         </div>
       </div>
     </article>

@@ -6,6 +6,7 @@ export const locales: Locale[] = ["ru", "en"];
 
 export interface GamesUiLabels {
   statusLabels: Record<Game["status"], string>;
+  catalog: string;
   play: string;
   details: string;
   unavailable: string;
@@ -37,8 +38,6 @@ export interface SiteContent {
   heroStatBuilds: string;
   heroDeployLabel: string;
   featuredEyebrow: string;
-  apiCatalogNote: string;
-  fallbackCatalogNote: string;
   catalogEyebrow: string;
   catalogTitle: string;
   catalogDescription: string;
@@ -62,7 +61,7 @@ export const siteContent = {
   siteTagline: "Браузерные игры, тактические эксперименты и аккуратные релизы.",
   seoTitle: "Viktor Games Lab | Браузерные игры",
   seoDescription:
-    "Viktor Games Lab - игровой хаб с браузерными экспериментами. Играй в Сапёр: Последняя ошибка и следи за новыми релизами.",
+    "Viktor Games Lab - игровой хаб с браузерными экспериментами. Играй в «Сапёр: Последняя ошибка» и пиратскую онлайн-настолку Pirate Tabletop.",
   brandAriaLabel: "Главная страница Viktor Games Lab",
   navAriaLabel: "Основная навигация",
   languageAriaLabel: "Выбор языка",
@@ -77,16 +76,14 @@ export const siteContent = {
     "Небольшая лаборатория браузерных игр: тактика, риск, быстрые прототипы и живые релизы без лишней витрины.",
   primaryButtonText: "Играть в Сапёр",
   secondaryButtonText: "Смотреть каталог",
-  heroStatGames: "1 опубликованная игра",
+  heroStatGames: "Доступно в браузере",
   heroStatBuilds: "Railway deploy",
   heroDeployLabel: "deploy",
   featuredEyebrow: "Главная игра",
-  apiCatalogNote: "Каталог загружен из live API игр.",
-  fallbackCatalogNote: "Показан локальный каталог. API игр можно подключить позже через /api/games.",
   catalogEyebrow: "Каталог игр",
   catalogTitle: "Игры лаборатории",
   catalogDescription:
-    "Пока здесь первый опубликованный релиз и несколько направлений, которые могут вырасти в следующие игры.",
+    "Выбирай браузерную игру или посмотри, какой прототип сейчас в разработке.",
   aboutEyebrow: "О лаборатории",
   aboutTitle: "Игры сначала. Архитектура - без шума.",
   aboutDescription:
@@ -102,10 +99,12 @@ export const siteContent = {
   gameLabels: {
     statusLabels: {
       published: "Опубликовано",
+      alpha: "Тестовая альфа",
       development: "В разработке",
       prototype: "Прототип",
       planned: "Скоро",
     },
+    catalog: "Все игры",
     play: "Играть",
     details: "Подробнее",
     unavailable: "Скоро",
@@ -121,7 +120,7 @@ export const siteContentByLocale = {
     siteTagline: "Browser games built with TypeScript, Railway, PostgreSQL and AI-assisted development.",
     seoTitle: "Viktor Games Lab | Browser Games",
     seoDescription:
-      "Viktor Games Lab is a browser games hub for playable experiments. Play Saper: Last Mistake and follow new releases.",
+      "Viktor Games Lab is a browser games hub for playable experiments. Play Saper: Last Mistake and the Pirate Tabletop online alpha.",
     brandAriaLabel: "Viktor Games Lab home",
     navAriaLabel: "Primary navigation",
     languageAriaLabel: "Language selection",
@@ -136,15 +135,13 @@ export const siteContentByLocale = {
       "Browser games built with TypeScript, Railway, PostgreSQL and AI-assisted development.",
     primaryButtonText: "Play Saper",
     secondaryButtonText: "Browse catalog",
-    heroStatGames: "1 published game",
+    heroStatGames: "Playable in browser",
     heroStatBuilds: "Railway deploy",
     heroDeployLabel: "deploy",
     featuredEyebrow: "Featured game",
-    apiCatalogNote: "Loaded from the live games API.",
-    fallbackCatalogNote: "Showing the local catalog. The /api/games endpoint can be connected later.",
     catalogEyebrow: "Games catalog",
     catalogTitle: "Lab games",
-    catalogDescription: "The hub currently has the first published release and a few directions that may grow into future games.",
+    catalogDescription: "Choose a browser game or explore the prototype in development.",
     aboutEyebrow: "About the lab",
     aboutTitle: "Games first. Architecture kept quiet.",
     aboutDescription:
@@ -160,10 +157,12 @@ export const siteContentByLocale = {
     gameLabels: {
       statusLabels: {
         published: "Published",
+        alpha: "Test alpha",
         development: "In development",
         prototype: "Prototype",
         planned: "Coming soon",
       },
+      catalog: "All games",
       play: "Play",
       details: "Details",
       unavailable: "Soon",

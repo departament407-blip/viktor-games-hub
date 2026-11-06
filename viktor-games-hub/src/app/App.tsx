@@ -3,8 +3,9 @@ import { FeaturedGame } from "../features/games/components/FeaturedGame";
 import { GamesGrid } from "../features/games/GamesGrid";
 import { fallbackGames } from "../features/games/fallback-games";
 import { loadGamesCatalog } from "../features/games/games-api";
+import { localizeGame } from "../features/games/game-locales";
 import { upcomingGames } from "../features/games/games-catalog";
-import type { Game, GamesCatalogSource } from "../features/games/games-types";
+import type { Game } from "../features/games/games-types";
 import { AboutLab } from "../features/home/AboutLab";
 import { GameHero } from "../features/home/GameHero";
 import { SiteHeader } from "../features/home/SiteHeader";
@@ -13,7 +14,6 @@ import { useDocumentMeta } from "./useDocumentMeta";
 
 interface GamesState {
   games: Game[];
-  source: GamesCatalogSource;
   isLoading: boolean;
 }
 
@@ -23,7 +23,6 @@ export function App() {
   const [locale, setLocale] = useState<Locale>("ru");
   const [gamesState, setGamesState] = useState<GamesState>({
     games: fallbackGames,
-    source: "fallback",
     isLoading: true,
   });
   const content = siteContentByLocale[locale];
@@ -39,7 +38,6 @@ export function App() {
 
       setGamesState({
         games: catalog.games,
-        source: catalog.source,
         isLoading: false,
       });
     });
@@ -59,11 +57,15 @@ export function App() {
   }, [content.htmlLang, content.seoDescription, content.seoTitle]);
 
   const publishedGames = useMemo(
-    () => gamesState.games.map((game) => enrichGameWithLocalAssets(game)),
-    [gamesState.games],
+    () => gamesState.games.map((game) => localizeGame(enrichGameWithLocalAssets(game), locale)),
+    [gamesState.games, locale],
   );
   const featuredGame = publishedGames.find((game) => game.featured) ?? publishedGames[0] ?? fallbackGames[0];
-  const catalogGames = [...publishedGames, ...upcomingGames];
+  const publishedSlugs = new Set(publishedGames.map((game) => game.slug));
+  const prototypes = upcomingGames
+    .filter((game) => !publishedSlugs.has(game.slug))
+    .map((game) => localizeGame(game, locale));
+  const catalogGames = [...publishedGames, ...prototypes];
 
   return (
     <main className="min-h-screen overflow-hidden bg-ink text-paper">
@@ -87,7 +89,8 @@ export function App() {
             lead: content.heroDescription,
             playFeatured: content.primaryButtonText,
             statBuilds: content.heroStatBuilds,
-            statGames: content.heroStatGames,
+            statGames: String(publishedGames.filter((game) => game.playUrl).length),
+            playableLabel: content.heroStatGames,
             title: content.heroTitle,
           }}
           featuredGame={featuredGame}
@@ -96,12 +99,9 @@ export function App() {
       </div>
 
       <FeaturedGame
-        apiNote={content.apiCatalogNote}
         eyebrow={content.featuredEyebrow}
-        fallbackNote={content.fallbackCatalogNote}
         game={featuredGame}
         labels={gameLabels}
-        source={gamesState.source}
       />
 
       <section

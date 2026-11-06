@@ -1,16 +1,13 @@
 import type { GamesUiLabels } from "../../../shared/config/site-content";
-import type { Game, GamesCatalogSource } from "../games-types";
+import type { Game } from "../games-types";
 
 interface FeaturedGameProps {
-  apiNote: string;
-  fallbackNote: string;
   game: Game;
   labels: GamesUiLabels;
-  source: GamesCatalogSource;
   eyebrow: string;
 }
 
-export function FeaturedGame({ apiNote, fallbackNote, game, labels, source, eyebrow }: FeaturedGameProps) {
+export function FeaturedGame({ game, labels, eyebrow }: FeaturedGameProps) {
   return (
     <section
       className="relative bg-ink px-[clamp(16px,4vw,56px)] py-12 sm:py-16"
@@ -28,10 +25,6 @@ export function FeaturedGame({ apiNote, fallbackNote, game, labels, source, eyeb
             {game.title}
           </h2>
           <p className="mt-4 text-base leading-relaxed text-paper/75 sm:text-lg">{game.description}</p>
-          <p className="mt-3 text-sm leading-relaxed text-paper/50">
-            {source === "api" ? apiNote : fallbackNote}
-          </p>
-
           {game.tags && game.tags.length > 0 ? (
             <ul className="mt-5 flex list-none flex-wrap gap-2 p-0" aria-label={`${labels.tagsAriaLabel}: ${game.title}`}>
               {game.tags.map((tag) => (
@@ -55,9 +48,9 @@ export function FeaturedGame({ apiNote, fallbackNote, game, labels, source, eyeb
             ) : null}
             <a
               className="inline-flex min-h-12 w-full items-center justify-center rounded-lg border border-paper/20 bg-paper/10 px-5 text-base font-black text-paper no-underline transition hover:-translate-y-0.5 focus-visible:-translate-y-0.5 sm:w-auto"
-              href={game.detailsUrl ?? "#about-lab"}
+              href={game.detailsUrl ?? "#games-catalog"}
             >
-              {labels.details}
+              {game.detailsUrl ? labels.details : labels.catalog}
             </a>
           </div>
         </div>
