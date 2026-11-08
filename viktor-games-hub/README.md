@@ -1,211 +1,54 @@
 # Viktor Games Lab
 
-Frontend-хаб для браузерных игр Viktor Games Lab. Сейчас это статический React/Vite сайт с локальным fallback-каталогом игр и готовой точкой подключения будущего API `GET /api/games`.
+Личный игровой хаб в виде футуристического компьютерного клуба: три игровые станции, движущиеся лазеры, музыка, русский и английский интерфейс. React 18, TypeScript и Vite. Хаб не содержит серверы самих игр.
 
-## Стек
-
-- React
-- TypeScript
-- Vite
-- Tailwind CSS без тяжелых UI-библиотек
-- Railway для деплоя
-
-## Локальный запуск
+## Запуск и проверка
 
 ```bash
-npm install
+npm ci
 npm run dev
-```
-
-По умолчанию Vite поднимет dev server на `http://localhost:5173`.
-
-## Build
-
-```bash
 npm run build
+npm test
 ```
 
-Собранный frontend появится в папке `dist`.
+`npm run start` раздаёт готовый `dist`, порт берётся из `PORT`. Музыка загружается только после нажатия «Включить музыку». При скрытии вкладки воспроизведение приостанавливается; вернувшись, нажмите кнопку снова. Автозапуска звука нет.
 
-## Static start
+## Где менять содержимое
 
-```bash
-npm run start
-```
+| Что                                          | Файл                                                                    |
+| -------------------------------------------- | ----------------------------------------------------------------------- |
+| Тексты RU/EN, SEO, подписи                   | `src/shared/config/site-content.ts`                                     |
+| Список игр, ссылки запуска, статусы, обложки | `src/features/games/games-catalog.ts`                                   |
+| Английские описания игр                      | `src/features/games/game-locales.ts`                                    |
+| Порядок игровых станций                      | `src/features/games/useGamesCatalog.ts`                                 |
+| Дизайн, адаптация и анимации                 | `src/styles.css`                                                        |
+| Интерьер и мебель                            | `public/assets/club/hall.webp`, `hall-mobile.webp`, `station-desk.webp` |
+| Обложка центральной станции                  | `public/assets/club/operative.webp`                                     |
+| Треки и порядок проигрывания                 | `src/features/audio/playlist.ts`, `public/assets/audio/`                |
+| Плеер и переходы                             | `src/features/audio/ClubAudioEngine.ts`                                 |
+| Светомузыка                                  | `src/features/club/LaserLights.tsx`                                     |
 
-Команда отдает собранный `dist` через `serve`. Для локальной проверки сначала выполните `npm run build`.
+Новая игра добавляется отдельным объектом в каталог. `playUrl` указывается только для доступной игры. «Властитель Галактики» пока показан как Windows-прототип без кнопки запуска. Внешние игры открываются по их существующим адресам; доступность комнат и авторизации внутри игр проверяется отдельно.
 
-## Railway deploy
+На телефоне станции листаются горизонтально, доступны стрелки и точки навигации. Подробности открываются кнопкой `i`. Диалог закрывается крестиком, Escape или нажатием вне него; фокус возвращается к кнопке. Громкость, язык и настройка эффектов сохраняются локально. Системное `prefers-reduced-motion` отключает движение.
 
-Проект содержит `railway.toml`:
+## Музыка и ассеты
 
-- build command: `npm install && npm run build`
-- start command: `npm run start`
+Два оригинальных инструментальных трека созданы в ElevenLabs Music v2 08.11.2026 по запросу владельца:
 
-Railway передаст порт через переменную `PORT`, а `serve` будет слушать `0.0.0.0`.
+- **Neon Afterhours** — футуристическое melodic techno, 90 секунд.
+- **Orbital Dreams** — атмосферное космическое techno с ностальгическим настроением Facing Worlds / UT99; оригинальная мелодия, без использования записи или сэмплов оригинального саундтрека, 90 секунд.
 
-## GitHub Actions deploy
+Файлы MP3 128 kbps приведены к общей целевой громкости −18 LUFS. Web Audio загружает и декодирует плейлист по первому нажатию, затем планирует шестисекундные equal-power crossfade по аудиочасам и повторяет список. Ползунок управляет общей громкостью обоих треков, включая переход. Анализатор общего сигнала управляет интенсивностью лазеров. API ElevenLabs и ключи на сайте не нужны; музыка раздаётся как статические файлы.
 
-В репозитории есть workflow `.github/workflows/deploy-viktor-games-hub.yml`. Он запускается при push в `main` или `master`, если изменились файлы хаба, а также вручную через `workflow_dispatch`.
+Клубный интерьер и прозрачная мебель созданы по утверждённому пользователем визуальному макету. Обложка Сапёра и поле Pirate Tabletop взяты из собственных игровых ассетов владельца. Rubik хранится локально; лицензия — `public/assets/fonts/OFL-Rubik.txt`.
 
-Нужно добавить GitHub secret:
+## Развёртывание
 
-```text
-RAILWAY_TOKEN
-```
+Действующий Railway-сервис `viktor-games-hub` подключён к GitHub `departament407-blip/viktor-games-hub`, ветка `master`, корневая папка `viktor-games-hub`. Изменения делайте в отдельной ветке и сливайте PR в `master` после проверки. Это запускает автоматический production deployment.
 
-Это должен быть Railway Project Token для нужного проекта/окружения.
+Существующий workflow `.github/workflows/deploy-viktor-games-hub.yml` — дополнительный CLI-вариант с `RAILWAY_TOKEN`; основной сервис уже подключён напрямую к GitHub. Не включайте два независимых деплоя без необходимости. Отдельный Railway-проект для редизайна не нужен.
 
-Опционально можно добавить GitHub repository variables:
+## Необязательный API каталога
 
-```text
-RAILWAY_SERVICE
-RAILWAY_ENVIRONMENT
-```
-
-`RAILWAY_SERVICE` нужен, если в Railway-проекте несколько сервисов. `RAILWAY_ENVIRONMENT` нужен, если нужно явно выбрать окружение.
-
-## How to edit content
-
-Основные тексты сайта вынесены в `src/shared/config/site-content.ts`.
-Там можно менять:
-
-- название сайта: `siteName`;
-- hero-заголовок: `heroTitle`;
-- описание hero: `heroDescription`;
-- текст главной кнопки: `primaryButtonText`;
-- заголовок каталога: `catalogTitle`;
-- заголовок и описание блока About: `aboutTitle`, `aboutDescription`;
-- текст футера: `footerText`;
-- SEO-тексты: `seoTitle`, `seoDescription`;
-- подписи кнопок, статусов, навигации и футера.
-
-Каталог игр редактируется в `src/features/games/games-catalog.ts`.
-Там меняются:
-
-- название и описание игры: `title`, `description`;
-- ссылка на игру: `playUrl`;
-- ссылка "Подробнее": `detailsUrl`;
-- статус: `status`;
-- жанры и теги: `tags`;
-- пути к картинкам: `coverImage`, `iconImage`, `heroImage`, `screenshots`.
-
-Ассеты лежат в `public/assets`. Для Сапёра используются файлы из `public/assets/games/saper-last-mistake`.
-
-После изменения текстов, ссылок или картинок выполните:
-
-```bash
-npm run build
-git add .
-git commit -m "Update site content"
-git push
-```
-
-Railway сейчас деплоит ветку `master`, поэтому для обычной работы создавайте отдельную ветку и открывайте Pull Request в `master`. Прямой push в `master` сразу уйдёт в production.
-
-## How to replace images
-
-Все публичные ассеты лежат в `public/assets`.
-
-Брендовые картинки:
-
-```text
-public/assets/brand/logo.svg
-public/assets/brand/favicon.svg
-public/assets/brand/apple-touch-icon.png
-public/assets/brand/og-image.png
-```
-
-Картинки игры `Сапёр: Последняя ошибка`:
-
-```text
-public/assets/games/saper-last-mistake/icon.png
-public/assets/games/saper-last-mistake/cover.png
-public/assets/games/saper-last-mistake/hero.png
-public/assets/games/saper-last-mistake/card-preview.png
-public/assets/games/saper-last-mistake/screenshots/screenshot-01.png
-public/assets/games/saper-last-mistake/screenshots/screenshot-02.png
-public/assets/games/saper-last-mistake/screenshots/screenshot-03.png
-```
-
-Чтобы заменить обложку Сапёра, положите новый файл вместо `public/assets/games/saper-last-mistake/cover.png`.
-Чтобы заменить большую hero-картинку, замените `hero.png`.
-Чтобы заменить картинку карточки в каталоге, замените `card-preview.png`.
-Чтобы заменить иконку игры, замените `icon.png`.
-Чтобы заменить social preview для шаринга, замените `public/assets/brand/og-image.png`.
-Чтобы заменить favicon, замените `public/assets/brand/favicon.svg`.
-
-Пути к игровым ассетам описаны в `src/features/games/games-catalog.ts`. Если имена файлов остаются такими же, React-код менять не нужно. После замены файлов выполните:
-
-```bash
-npm run build
-git add .
-git commit -m "Update game assets"
-git push
-```
-
-Если Railway подключён к `master`, пушьте изменения в feature-ветку и мержите через Pull Request.
-
-## Будущий API `/api/games`
-
-При загрузке хаб делает запрос:
-
-```http
-GET /api/games
-```
-
-Поддерживаются оба формата ответа:
-
-```json
-[
-  {
-    "slug": "saper-last-mistake",
-    "title": "Сапёр: Последняя ошибка",
-    "description": "Тактический браузерный сапёр с оперативниками, HP, перками и биомами.",
-    "playUrl": "https://game-saper-last-mistake-production.up.railway.app/",
-    "status": "published",
-    "iconImage": "/assets/games/saper-last-mistake/icon.png",
-    "coverImage": "/assets/games/saper-last-mistake/cover.png",
-    "heroImage": "/assets/games/saper-last-mistake/hero.png",
-    "cardPreviewImage": "/assets/games/saper-last-mistake/card-preview.png",
-    "screenshots": [
-      "/assets/games/saper-last-mistake/screenshots/screenshot-01.png",
-      "/assets/games/saper-last-mistake/screenshots/screenshot-02.png",
-      "/assets/games/saper-last-mistake/screenshots/screenshot-03.png"
-    ]
-  }
-]
-```
-
-или:
-
-```json
-{
-  "games": [
-    {
-      "slug": "saper-last-mistake",
-      "title": "Сапёр: Последняя ошибка",
-      "description": "Тактический браузерный сапёр с оперативниками, HP, перками и биомами.",
-      "playUrl": "https://game-saper-last-mistake-production.up.railway.app/",
-      "status": "published",
-      "iconImage": "/assets/games/saper-last-mistake/icon.png",
-      "coverImage": "/assets/games/saper-last-mistake/cover.png",
-      "heroImage": "/assets/games/saper-last-mistake/hero.png",
-      "cardPreviewImage": "/assets/games/saper-last-mistake/card-preview.png",
-      "screenshots": [
-        "/assets/games/saper-last-mistake/screenshots/screenshot-01.png",
-        "/assets/games/saper-last-mistake/screenshots/screenshot-02.png",
-        "/assets/games/saper-last-mistake/screenshots/screenshot-03.png"
-      ]
-    }
-  ]
-}
-```
-
-Если API недоступен, используется локальный список из `src/features/games/games-catalog.ts`.
-
-Для отдельного API-домена можно задать:
-
-```bash
-VITE_API_BASE_URL=https://example.com
-```
+Сохранён контракт `GET /api/games`: массив `Game[]` или `{ "games": [...] }`. При ошибке/HTML-ответе используется локальный каталог. `VITE_API_BASE_URL` позволяет задать внешний API. Формат игры описан в `src/features/games/games-types.ts`; обязательны `slug`, `title`, `description`, `status`. Необязательные изображения из локального каталога дополняют ответ API. По умолчанию сайт полностью статический.

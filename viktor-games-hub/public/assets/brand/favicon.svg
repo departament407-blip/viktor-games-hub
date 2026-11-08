@@ -1,6 +1,1 @@
-<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Viktor Games Lab icon">
-  <rect width="64" height="64" rx="14" fill="#080c0b"/>
-  <rect x="7" y="7" width="50" height="50" rx="11" stroke="#ffc857" stroke-opacity="0.45" stroke-width="2"/>
-  <path d="M19 17L31 47H37L49 17H41L34 37L27 17H19Z" fill="#ffc857"/>
-  <path d="M12 50H30M50 12V30" stroke="#69d6a9" stroke-opacity="0.45" stroke-width="3" stroke-linecap="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="13" fill="#050c17"/><path d="M9 13h9l15 25 15-25h8L33 54 9 13Z" fill="#8ceaff"/><path d="m23 13 11 19 4-7-7-12h-8Z" fill="#8ceaff" opacity=".45"/></svg>

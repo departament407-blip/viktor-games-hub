@@ -1,172 +1,76 @@
-import type { Game } from "../../features/games/games-types";
-
 export type Locale = "ru" | "en";
-
 export const locales: Locale[] = ["ru", "en"];
 
-export interface GamesUiLabels {
-  statusLabels: Record<Game["status"], string>;
-  catalog: string;
-  play: string;
-  details: string;
-  unavailable: string;
-  tagsAriaLabel: string;
-}
-
-interface SiteNavContent {
-  featured: string;
-  catalog: string;
-  about: string;
-}
-
-export interface SiteContent {
-  htmlLang: string;
-  siteName: string;
-  siteTagline: string;
-  seoTitle: string;
-  seoDescription: string;
-  brandAriaLabel: string;
-  navAriaLabel: string;
-  languageAriaLabel: string;
-  nav: SiteNavContent;
-  heroEyebrow: string;
-  heroTitle: string;
-  heroDescription: string;
-  primaryButtonText: string;
-  secondaryButtonText: string;
-  heroStatGames: string;
-  heroStatBuilds: string;
-  heroDeployLabel: string;
-  featuredEyebrow: string;
-  catalogEyebrow: string;
-  catalogTitle: string;
-  catalogDescription: string;
-  aboutEyebrow: string;
-  aboutTitle: string;
-  aboutDescription: string;
-  stackTitle: string;
-  processTitle: string;
-  stack: readonly string[];
-  process: readonly string[];
-  footerText: string;
-  footerRailway: string;
-  footerGithub: string;
-  footerBackToTop: string;
-  gameLabels: GamesUiLabels;
-}
-
-export const siteContent = {
-  htmlLang: "ru",
-  siteName: "Viktor Games Lab",
-  siteTagline: "Браузерные игры, тактические эксперименты и аккуратные релизы.",
-  seoTitle: "Viktor Games Lab | Браузерные игры",
-  seoDescription:
-    "Viktor Games Lab - игровой хаб с браузерными экспериментами. Играй в «Сапёр: Последняя ошибка» и пиратскую онлайн-настолку Pirate Tabletop.",
-  brandAriaLabel: "Главная страница Viktor Games Lab",
-  navAriaLabel: "Основная навигация",
-  languageAriaLabel: "Выбор языка",
-  nav: {
-    featured: "Главная игра",
-    catalog: "Каталог",
-    about: "О лаборатории",
-  },
-  heroEyebrow: "Браузерные игры и тактические эксперименты",
-  heroTitle: "Игровой хаб\nViktor Games Lab",
-  heroDescription:
-    "Небольшая лаборатория браузерных игр: тактика, риск, быстрые прототипы и живые релизы без лишней витрины.",
-  primaryButtonText: "Играть в Сапёр",
-  secondaryButtonText: "Смотреть каталог",
-  heroStatGames: "Доступно в браузере",
-  heroStatBuilds: "Railway deploy",
-  heroDeployLabel: "deploy",
-  featuredEyebrow: "Главная игра",
-  catalogEyebrow: "Каталог игр",
-  catalogTitle: "Игры лаборатории",
-  catalogDescription:
-    "Выбирай браузерную игру или посмотри, какой прототип сейчас в разработке.",
-  aboutEyebrow: "О лаборатории",
-  aboutTitle: "Игры сначала. Архитектура - без шума.",
-  aboutDescription:
-    "Хаб остаётся лёгким frontend-проектом: React, TypeScript, Vite и Railway. Backend/API можно подключить позже, когда каталогу понадобится реальная динамика.",
-  stackTitle: "Как собрано",
-  processTitle: "Как развивается",
-  stack: ["React", "TypeScript", "Vite", "Tailwind", "Railway", "API-ready"],
-  process: ["Прототип", "Играбельный релиз", "Итерации по балансу"],
-  footerText: "Браузерные игры, тактические эксперименты и аккуратные релизы.",
-  footerRailway: "Railway",
-  footerGithub: "GitHub",
-  footerBackToTop: "Наверх",
-  gameLabels: {
-    statusLabels: {
-      published: "Опубликовано",
-      alpha: "Тестовая альфа",
-      development: "В разработке",
-      prototype: "Прототип",
-      planned: "Скоро",
-    },
-    catalog: "Все игры",
-    play: "Играть",
-    details: "Подробнее",
-    unavailable: "Скоро",
-    tagsAriaLabel: "Теги игры",
-  },
-} satisfies SiteContent;
-
 export const siteContentByLocale = {
-  ru: siteContent,
+  ru: {
+    htmlLang: "ru",
+    siteName: "Viktor Games Lab",
+    seoTitle: "Viktor Games Lab | Входи в игру",
+    seoDescription:
+      "Твой игровой клуб в браузере. Сапёр с оперативниками, пиратская настолка Pirate Tabletop и космические эксперименты Виктора.",
+    heroTitle: "Входи в игру",
+    heroDescription: "Твой игровой клуб в браузере",
+    catalog: "Игры",
+    chooseGame: "Выбери игру и занимай место",
+    chooseMobile: "Листай и выбирай свою игру",
+    play: "Играть",
+    inDevelopment: "В разработке",
+    alpha: "Тестовая альфа",
+    prototype: "Прототип Windows",
+    browser: "Браузерная игра",
+    selectGame: "Выбрать игру",
+    details: "Об игре",
+    close: "Закрыть",
+    previous: "Предыдущая игра",
+    next: "Следующая игра",
+    language: "Язык сайта",
+    soundOn: "Музыка играет",
+    soundOff: "Включить музыку",
+    soundLoading: "Загружаю трек…",
+    volume: "Громкость музыки",
+    audioError: "Трек не загрузился. Попробуй включить ещё раз.",
+    effectsOn: "Остановить световые эффекты",
+    effectsOff: "Включить световые эффекты",
+    footnote: "Авторские игры и эксперименты Виктора",
+    backToTop: "Наверх",
+    skip: "К выбору игры",
+    launch: "Открываю игру…",
+    track: "NEON AFTERHOURS · ELEVENLABS",
+  },
   en: {
     htmlLang: "en",
     siteName: "Viktor Games Lab",
-    siteTagline: "Browser games built with TypeScript, Railway, PostgreSQL and AI-assisted development.",
-    seoTitle: "Viktor Games Lab | Browser Games",
+    seoTitle: "Viktor Games Lab | Step into the game",
     seoDescription:
-      "Viktor Games Lab is a browser games hub for playable experiments. Play Saper: Last Mistake and the Pirate Tabletop online alpha.",
-    brandAriaLabel: "Viktor Games Lab home",
-    navAriaLabel: "Primary navigation",
-    languageAriaLabel: "Language selection",
-    nav: {
-      featured: "Featured",
-      catalog: "Catalog",
-      about: "About",
-    },
-    heroEyebrow: "Browser games and tactical experiments",
-    heroTitle: "Viktor Games Lab\ngame hub",
-    heroDescription:
-      "Browser games built with TypeScript, Railway, PostgreSQL and AI-assisted development.",
-    primaryButtonText: "Play Saper",
-    secondaryButtonText: "Browse catalog",
-    heroStatGames: "Playable in browser",
-    heroStatBuilds: "Railway deploy",
-    heroDeployLabel: "deploy",
-    featuredEyebrow: "Featured game",
-    catalogEyebrow: "Games catalog",
-    catalogTitle: "Lab games",
-    catalogDescription: "Choose a browser game or explore the prototype in development.",
-    aboutEyebrow: "About the lab",
-    aboutTitle: "Games first. Architecture kept quiet.",
-    aboutDescription:
-      "The hub stays a lightweight frontend: React, TypeScript, Vite and Railway. A backend/API can be connected later when the catalog needs real dynamic data.",
-    stackTitle: "Built with",
-    processTitle: "Workflow",
-    stack: ["React", "TypeScript", "Vite", "Tailwind", "Railway", "API-ready"],
-    process: ["Prototype", "Playable release", "Balance iterations"],
-    footerText: "Browser games, tactical experiments and careful releases.",
-    footerRailway: "Railway",
-    footerGithub: "GitHub",
-    footerBackToTop: "Back to top",
-    gameLabels: {
-      statusLabels: {
-        published: "Published",
-        alpha: "Test alpha",
-        development: "In development",
-        prototype: "Prototype",
-        planned: "Coming soon",
-      },
-      catalog: "All games",
-      play: "Play",
-      details: "Details",
-      unavailable: "Soon",
-      tagsAriaLabel: "Game tags",
-    },
+      "Your browser gaming club. Tactical minesweeper, Pirate Tabletop and Viktor's experiments in space strategy.",
+    heroTitle: "Step into the game",
+    heroDescription: "Your gaming club in the browser",
+    catalog: "Games",
+    chooseGame: "Choose your game. Take your seat.",
+    chooseMobile: "Swipe to choose your game",
+    play: "Play",
+    inDevelopment: "In development",
+    alpha: "Test alpha",
+    prototype: "Windows prototype",
+    browser: "Browser game",
+    selectGame: "Select game",
+    details: "About the game",
+    close: "Close",
+    previous: "Previous game",
+    next: "Next game",
+    language: "Website language",
+    soundOn: "Music playing",
+    soundOff: "Play music",
+    soundLoading: "Loading track…",
+    volume: "Music volume",
+    audioError: "The track could not load. Try playing it again.",
+    effectsOn: "Pause light effects",
+    effectsOff: "Enable light effects",
+    footnote: "Games and experiments by Viktor",
+    backToTop: "Back to top",
+    skip: "Skip to games",
+    launch: "Opening game…",
+    track: "NEON AFTERHOURS · ELEVENLABS",
   },
-} satisfies Record<Locale, SiteContent>;
+};
+export type SiteContent = typeof siteContentByLocale.ru;
