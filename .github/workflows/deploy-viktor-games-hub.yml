@@ -40,6 +40,10 @@ jobs:
         working-directory: ${{ env.APP_DIR }}
         run: npm ci
 
+      - name: Test audio transitions
+        working-directory: ${{ env.APP_DIR }}
+        run: npm test
+
       - name: Build
         working-directory: ${{ env.APP_DIR }}
         run: npm run build
