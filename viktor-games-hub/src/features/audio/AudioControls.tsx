@@ -15,7 +15,10 @@ export function AudioControls({
       ? copy.soundOn
       : copy.soundOff;
   return (
-    <div className={`audio-controls ${audio.playing ? "is-playing" : ""}`}>
+    <div
+      data-audio-controls
+      className={`audio-controls ${audio.playing ? "is-playing" : ""}`}
+    >
       <button
         className="audio-toggle"
         type="button"

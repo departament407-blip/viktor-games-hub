@@ -10,11 +10,11 @@ export const gamesCatalog: Game[] = [
       "Тактический браузерный сапёр с оперативниками, HP, перками и биомами.",
     playUrl: "https://game-saper-last-mistake-production.up.railway.app/",
     status: "published",
-    iconImage: `${saperAssetsBase}/icon.png`,
+    iconImage: `${saperAssetsBase}/squad-bar.webp`,
     coverImage: `${saperAssetsBase}/cover.png`,
     heroImage: `${saperAssetsBase}/hero.png`,
-    cardPreviewImage: "/assets/club/operative.webp",
-    coverAlt: "Обложка тактической браузерной игры Сапёр: Последняя ошибка",
+    cardPreviewImage: `${saperAssetsBase}/squad-bar.webp`,
+    coverAlt: "Шесть сапёров обнимаются за столиком в баре",
     featured: true,
     screenshots: [
       `${saperAssetsBase}/screenshots/screenshot-01.png`,
@@ -25,13 +25,13 @@ export const gamesCatalog: Game[] = [
   },
   {
     slug: "pirate-tabletop",
-    title: "Pirate Tabletop",
+    title: "Шакал",
     description:
       "Открывай остров клетка за клеткой и доставляй золото на корабль. Играй с друзьями по коду комнаты или против 1–3 ботов.",
     playUrl: "https://game-backend-production-550d.up.railway.app/",
     status: "alpha",
-    cardPreviewImage: "/assets/games/pirate-tabletop/board.webp",
-    coverAlt: "Игровое поле Pirate Tabletop с открытыми тайлами острова",
+    cardPreviewImage: "/assets/games/pirate-tabletop/pirate-cover.webp",
+    coverAlt: "Пират с компасом и сокровищами на тропическом острове",
     tags: ["Настольная стратегия", "Онлайн", "Соло"],
   },
 ];

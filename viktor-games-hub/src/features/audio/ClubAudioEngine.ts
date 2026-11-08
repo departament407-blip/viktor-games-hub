@@ -32,7 +32,10 @@ export class ClubAudioEngine {
     );
   }
 
-  async play() {
+  async play(automatic = false) {
+    // An allowed AudioContext starts running immediately. A suspended one must
+    // wait for an actual gesture; never leave the UI waiting on resume().
+    if (automatic && this.context.state !== "running") return false;
     this.wanted = true;
     // Unlock the audio context directly inside the user's click gesture.
     const resume = this.context.resume();
@@ -88,10 +91,7 @@ export class ClubAudioEngine {
     const incoming = Float32Array.from({ length: 64 }, (_, i) =>
       Math.sin(((i / 63) * Math.PI) / 2),
     );
-    const outgoing = Float32Array.from(
-      incoming,
-      (_, i) => incoming[63 - i],
-    );
+    const outgoing = Float32Array.from(incoming, (_, i) => incoming[63 - i]);
     envelope.gain.setValueAtTime(0, start);
     envelope.gain.setValueCurveAtTime(incoming, start, fadeIn);
     envelope.gain.setValueAtTime(1, start + buffer.duration - fade);

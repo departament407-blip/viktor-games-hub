@@ -1,0 +1,290 @@
+.carousel-floor {
+  padding: 0 3%;
+  max-width: 1510px;
+}
+.carousel-floor .carousel-rail {
+  display: block;
+  position: relative;
+  height: clamp(500px, 43vw, 635px);
+  perspective: 1500px;
+  overflow: visible;
+  padding: 0;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+}
+.carousel-floor .carousel-rail:active {
+  cursor: grabbing;
+}
+.carousel-floor .station {
+  --slot: 0;
+  --scale: 1;
+  --drop: 0px;
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  width: clamp(290px, 32vw, 470px);
+  transform: translateX(calc(-50% + var(--slot) * 91%)) translateY(var(--drop))
+    scale(var(--scale));
+  transform-origin: center top;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 0.7, 0.23, 1),
+    opacity 0.4s,
+    filter 0.4s;
+  z-index: 2;
+  opacity: 1;
+  filter: saturate(1.05);
+}
+.carousel-floor .station[data-offset="-1"],
+.carousel-floor .station[data-offset="1"] {
+  --scale: 0.78;
+  --drop: 65px;
+  z-index: 1;
+  filter: saturate(0.75) brightness(0.8);
+}
+.carousel-floor .station[data-offset="-1"] {
+  --slot: -1;
+}
+.carousel-floor .station[data-offset="1"] {
+  --slot: 1;
+}
+.carousel-floor .station[data-offset="-2"] {
+  --slot: -2;
+}
+.carousel-floor .station[data-offset="2"] {
+  --slot: 2;
+}
+.carousel-floor .station[aria-hidden="true"] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  --scale: 0.6;
+  --drop: 100px;
+}
+.carousel-floor .station .station-screen {
+  height: clamp(360px, 32vw, 470px);
+  border-width: 6px;
+  transform: none;
+}
+.carousel-floor .station[data-offset="-1"] .station-screen {
+  transform: rotateY(9deg) rotateZ(-1deg);
+}
+.carousel-floor .station[data-offset="1"] .station-screen {
+  transform: rotateY(-9deg) rotateZ(1deg);
+}
+.carousel-floor .station .station-art {
+  transform: none;
+  object-position: center 24%;
+  filter: none;
+  opacity: 1;
+}
+.carousel-floor .station[data-slug="saper-last-mistake"] .station-art {
+  object-position: center 28%;
+}
+.carousel-floor .station .screen-shade {
+  background: linear-gradient(
+    180deg,
+    transparent 35%,
+    #03061010 48%,
+    #040610b3 70%,
+    #040810 100%
+  );
+}
+.carousel-floor .station .station-copy {
+  bottom: 22px;
+  left: 24px;
+  right: 24px;
+}
+.carousel-floor .station .station-copy h2 {
+  font-size: clamp(28px, 2.7vw, 42px);
+  font-style: italic;
+  font-weight: 900;
+  max-width: 100%;
+}
+.carousel-floor .station[data-slug="vlastitel-galaktiki"] .station-copy h2 {
+  font-size: clamp(26px, 2.2vw, 35px);
+}
+.carousel-floor .station .station-subtitle {
+  font-size: 13px;
+  letter-spacing: 0.035em;
+  margin: 8px 0 18px;
+  text-transform: none;
+}
+.carousel-floor .station .play-button {
+  font-size: 15px;
+  min-height: 46px;
+  width: 238px;
+}
+.carousel-floor .station:not(.is-selected) .station-actions {
+  visibility: hidden;
+  pointer-events: none;
+}
+.carousel-floor .station:not(.is-selected) .station-copy {
+  bottom: 0;
+}
+.carousel-floor .station .station-desk {
+  width: 120%;
+  margin: -24px -10% 0;
+}
+.carousel-floor .carousel-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 0;
+}
+.carousel-navigation > button {
+  width: 48px;
+  height: 44px;
+  border: 1px solid #77ddff66;
+  border-radius: 5px;
+  background: #071626c9;
+  color: #a7eaff;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.carousel-navigation > button:hover {
+  background: #16384c;
+  border-color: #a1edff;
+  box-shadow: 0 0 22px #42d5ff33;
+}
+.carousel-navigation > button:disabled {
+  opacity: 0.35;
+}
+.carousel-selection {
+  width: min(310px, 50vw);
+  text-align: center;
+}
+.carousel-selection > span {
+  color: #88eaff;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+}
+.carousel-selection b {
+  font-weight: 400;
+  color: #647f91;
+}
+.carousel-selection p {
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 5px 0 0;
+  color: #deeff9;
+}
+.carousel-floor .carousel-dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 400px;
+  margin: 6px auto 0;
+}
+.carousel-dots button {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 30px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+.carousel-dots button span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #6e8598;
+}
+.carousel-dots button.is-current span {
+  width: 7px;
+  height: 7px;
+  background: #80edff;
+  box-shadow: 0 0 10px #63d5ff;
+}
+.carousel-hint {
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #a1bacb;
+  margin: 0 12px;
+}
+.club--launching .carousel-floor .station.is-launching {
+  transform: translateX(-50%) scale(1.06);
+}
+@media (max-width: 760px) {
+  .carousel-floor {
+    padding: 0;
+  }
+  .carousel-floor .carousel-rail {
+    height: calc(clamp(350px, 46svh, 435px) + 32vw + 25px);
+    overflow: visible;
+  }
+  .carousel-floor .station {
+    width: 82vw;
+    --drop: 0px;
+  }
+  .carousel-floor .station[data-offset="-1"],
+  .carousel-floor .station[data-offset="1"] {
+    --scale: 0.82;
+    --drop: 35px;
+  }
+  .carousel-floor .station .station-screen {
+    height: clamp(350px, 46svh, 435px);
+  }
+  .carousel-floor .station .station-copy {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+  }
+  .carousel-floor .station .station-copy h2 {
+    font-size: 36px;
+  }
+  .carousel-floor .station[data-slug="vlastitel-galaktiki"] .station-copy h2 {
+    font-size: 28px;
+  }
+  .carousel-floor .station .station-subtitle {
+    font-size: 12px;
+  }
+  .carousel-floor .carousel-navigation {
+    gap: 12px;
+    margin-top: 0;
+  }
+  .carousel-selection p {
+    font-size: 12px;
+  }
+  .carousel-hint {
+    font-size: 10px;
+  }
+  .carousel-floor .station .station-actions {
+    gap: 10px;
+  }
+  .carousel-floor .station .play-button {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+}
+/* Keep the desk clear of navigation and preserve circular transforms on hover. */
+@media (min-width: 761px) {
+  .carousel-floor .carousel-rail {
+    height: calc(clamp(360px, 32vw, 470px) * 1.4 + 40px);
+  }
+  .carousel-navigation > button {
+    position: absolute;
+    top: clamp(200px, 18vw, 270px);
+    z-index: 5;
+  }
+  .carousel-navigation > button:first-child {
+    left: 14px;
+  }
+  .carousel-navigation > button:last-child {
+    right: 14px;
+  }
+}
+.motion-on .carousel-floor .station:hover {
+  transform: translateX(calc(-50% + var(--slot) * 91%)) translateY(var(--drop))
+    scale(var(--scale));
+}
+.carousel-floor .carousel-navigation {
+  position: static;
+}
+.carousel-selection {
+  position: relative;
+  z-index: 3;
+}
