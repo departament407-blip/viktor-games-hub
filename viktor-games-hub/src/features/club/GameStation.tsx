@@ -6,6 +6,7 @@ interface Props {
   game: Game;
   copy: SiteContent;
   selected: boolean;
+  offset: number;
   launching: boolean;
   onSelect: () => void;
   onLaunch: (event: MouseEvent<HTMLAnchorElement>, game: Game) => void;
@@ -16,6 +17,7 @@ export function GameStation({
   game,
   copy,
   selected,
+  offset,
   launching,
   onSelect,
   onLaunch,
@@ -33,7 +35,9 @@ export function GameStation({
 
   return (
     <article
-      className={`station station--${theme} ${saper ? "station--featured" : ""} ${selected ? "is-selected" : ""} ${launching ? "is-launching" : ""}`}
+      className={`station station--${theme} ${selected ? "station--featured" : ""} ${selected ? "is-selected" : ""} ${launching ? "is-launching" : ""}`}
+      data-offset={Math.max(-2, Math.min(2, offset))}
+      aria-hidden={Math.abs(offset) > 1 || undefined}
       id={game.slug}
       data-slug={game.slug}
       aria-labelledby={`${game.slug}-title`}
@@ -45,8 +49,10 @@ export function GameStation({
           onClick={onSelect}
           aria-label={`${copy.selectGame} — ${game.title}`}
           aria-pressed={selected}
+          tabIndex={Math.abs(offset) <= 1 ? 0 : -1}
         >
           <img
+            draggable={false}
             className="station-art"
             src={game.cardPreviewImage ?? game.coverImage}
             alt=""
@@ -61,6 +67,7 @@ export function GameStation({
           <div className="station-actions">
             {game.playUrl ? (
               <a
+                tabIndex={selected ? 0 : -1}
                 href={game.playUrl}
                 className="play-button"
                 onClick={(event) => onLaunch(event, game)}
@@ -76,6 +83,7 @@ export function GameStation({
             <button
               type="button"
               className="game-info"
+              tabIndex={selected ? 0 : -1}
               onClick={onDetails}
               aria-label={`${copy.details} — ${game.title}`}
             >

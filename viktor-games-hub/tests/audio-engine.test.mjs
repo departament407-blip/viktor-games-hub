@@ -215,3 +215,25 @@ test("a failed download can be retried without a stuck loading state", async (t)
   assert.equal(await engine.play(), true);
   engine.dispose();
 });
+
+test("blocked autoplay returns immediately without fetching; a later gesture starts the same engine", async () => {
+  const engine = new ClubAudioEngine(() => {});
+  engine.context.resume = () => {
+    throw new Error("Autoplay must not await a blocked resume");
+  };
+  assert.equal(await engine.play(true), false);
+  assert.equal(fetch.mock.calls.length, 0);
+  assert.equal(engine.context.sources.length, 0);
+  engine.context.resume = Context.prototype.resume;
+  assert.equal(await engine.play(), true);
+  assert.equal(engine.context.sources.length, 1);
+  engine.dispose();
+});
+
+test("autoplay starts when the browser already allows audio", async () => {
+  const engine = new ClubAudioEngine(() => {});
+  engine.context.state = "running";
+  assert.equal(await engine.play(true), true);
+  assert.equal(engine.context.sources.length, 1);
+  engine.dispose();
+});

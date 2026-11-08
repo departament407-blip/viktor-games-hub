@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import type { MouseEvent } from "react";
 import type { Game } from "../features/games/games-types";
 import { useGamesCatalog } from "../features/games/useGamesCatalog";
+import { useHubSection } from "../features/navigation/useHubSection";
+import { ApplicationsFloor } from "../features/applications/ApplicationsFloor";
 import { ClubHeader } from "../features/club/ClubHeader";
 import { GameFloor } from "../features/club/GameFloor";
 import { GameDetails } from "../features/club/GameDetails";
@@ -17,6 +19,7 @@ import { readPreference, savePreference } from "../shared/config/preferences";
 import { useDocumentMeta } from "./useDocumentMeta";
 
 export function App() {
+  const section = useHubSection();
   const [locale, setLocale] = useState<Locale>(() =>
     readPreference("locale", "ru") === "en" ? "en" : "ru",
   );
@@ -81,10 +84,18 @@ export function App() {
           playing={audio.playing}
         />
       </div>
-      <a className="skip-link" href="#games-catalog">
+      <a
+        className="skip-link"
+        href={section === "games" ? "#games-catalog" : "#applications-catalog"}
+      >
         {copy.skip}
       </a>
-      <ClubHeader locale={locale} onLocaleChange={setLocale} copy={copy}>
+      <ClubHeader
+        section={section}
+        locale={locale}
+        onLocaleChange={setLocale}
+        copy={copy}
+      >
         <AudioControls audio={audio} copy={copy} />
       </ClubHeader>
       <main>
@@ -94,22 +105,44 @@ export function App() {
             VIKTOR GAMES LAB
             <span />
           </p>
-          <h1>{copy.heroTitle}</h1>
-          <p className="hero-description">{copy.heroDescription}</p>
+          <h1>
+            {section === "games" ? copy.heroTitle : copy.applicationsTitle}
+          </h1>
+          <p className="hero-description">
+            {section === "games"
+              ? copy.heroDescription
+              : copy.applicationsDescription}
+          </p>
         </div>
-        <GameFloor
-          games={games}
-          copy={copy}
-          selected={selected}
-          launching={launching}
-          motion={lights.enabled}
-          onSelect={setSelected}
-          onDetails={(game) => {
-            detailOpener.current = document.activeElement as HTMLElement;
-            setDetails(game.slug);
-          }}
-          onLaunch={launch}
-        />
+        {section === "games" ? (
+          <GameFloor
+            games={games}
+            copy={copy}
+            selected={selected}
+            launching={launching}
+            onSelect={setSelected}
+            onDetails={(game) => {
+              detailOpener.current = document.activeElement as HTMLElement;
+              setDetails(game.slug);
+            }}
+            onLaunch={launch}
+          />
+        ) : (
+          <ApplicationsFloor
+            locale={locale}
+            copy={copy}
+            onLaunch={(event) => {
+              if (
+                !event.metaKey &&
+                !event.ctrlKey &&
+                !event.shiftKey &&
+                !event.altKey &&
+                event.button === 0
+              )
+                audio.pause();
+            }}
+          />
+        )}
       </main>
       <footer className="club-footer">
         <p>{copy.footnote}</p>
