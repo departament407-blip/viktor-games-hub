@@ -26,10 +26,11 @@ export const gamesCatalog: Game[] = [
   {
     slug: "pirate-tabletop",
     title: "Шакал",
+    subtitle: "Остров потерянного золота",
     description:
       "Открывай остров клетка за клеткой и доставляй золото на корабль. Играй с друзьями по коду комнаты или против 1–3 ботов.",
     playUrl: "https://game-backend-production-550d.up.railway.app/",
-    status: "alpha",
+    status: "published",
     cardPreviewImage: "/assets/games/pirate-tabletop/pirate-cover.webp",
     coverAlt: "Пират с компасом и сокровищами на тропическом острове",
     tags: ["Настольная стратегия", "Онлайн", "Соло"],
@@ -38,13 +39,12 @@ export const gamesCatalog: Game[] = [
 
 export const upcomingGames: Game[] = [
   {
-    slug: "vlastitel-galaktiki",
-    title: "Властитель Галактики",
-    description:
-      "В прототипе космической RTS материнский корабль отправляет приказы зонду. Чем дальше зонд, тем позже приходит ответ. Сейчас это прототип для Windows.",
-    status: "prototype",
-    cardPreviewImage: "/assets/games/vlastitel-galaktiki/sector.svg",
-    coverAlt: "Схема маршрута и связи с зондом",
-    tags: ["Космическая RTS", "Windows"],
+    slug: "tyaga-k-nebu",
+    title: "Тяга к небу",
+    description: "Среди обломков на далёкой планете в небо поднимается самолёт.",
+    status: "announced",
+    cardPreviewImage: "/assets/games/tyaga-k-nebu/poster.webp",
+    coverAlt: "Постер «Тяга к небу»: человек у разбитого корабля тянется вслед взлетающему самолёту.",
+    tags: ["Фантастика", "Полёт"],
   },
 ];

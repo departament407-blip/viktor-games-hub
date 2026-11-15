@@ -3,7 +3,7 @@ import type { Game } from "./games-types";
 
 const english: Record<
   string,
-  Pick<Game, "title" | "description" | "tags" | "coverAlt">
+  Pick<Game, "title" | "subtitle" | "description" | "tags" | "coverAlt">
 > = {
   "saper-last-mistake": {
     title: "Saper: Last Mistake",
@@ -14,18 +14,18 @@ const english: Record<
   },
   "pirate-tabletop": {
     title: "Jackal",
+    subtitle: "Island of Lost Gold",
     description:
       "Explore the island tile by tile and bring gold back to your ship. Share a room code with friends or play against one to three bots.",
     tags: ["Board game", "Online", "Solo"],
     coverAlt:
       "A pirate captain with a compass and treasure on a tropical island",
   },
-  "vlastitel-galaktiki": {
-    title: "Lord of the Galaxy",
-    description:
-      "Command a probe from your mothership in this Windows RTS prototype. The farther the probe travels, the longer its reports take to reach you.",
-    tags: ["Space RTS", "Windows"],
-    coverAlt: "A diagram of a probe route and its communications link",
+  "tyaga-k-nebu": {
+    title: "Тяга к небу",
+    description: "On a distant planet, a plane rises above the wreckage.",
+    tags: ["Science fiction", "Flight"],
+    coverAlt: "A lone figure beside a wreck reaches after a plane taking off.",
   },
 };
 

@@ -3,7 +3,7 @@ import type { Game, GamesCatalogResult, GameStatus } from "./games-types";
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "") ?? "";
 const gamesEndpoint = `${apiBaseUrl}/api/games`;
-const supportedStatuses: GameStatus[] = ["published", "alpha", "development", "prototype", "planned"];
+const supportedStatuses: GameStatus[] = ["published", "alpha", "development", "prototype", "planned", "announced"];
 
 export async function loadGamesCatalog(): Promise<GamesCatalogResult> {
   try {
@@ -55,6 +55,7 @@ function normalizeGame(game: Game): Game {
   return {
     slug: game.slug,
     title: game.title,
+    subtitle: game.subtitle,
     description: game.description,
     playUrl: game.playUrl,
     status: game.status,
@@ -79,6 +80,7 @@ function isGame(value: unknown): value is Game {
     typeof value.slug === "string" &&
     typeof value.title === "string" &&
     typeof value.description === "string" &&
+    (value.subtitle === undefined || typeof value.subtitle === "string") &&
     (value.playUrl === undefined || typeof value.playUrl === "string") &&
     isGameStatus(value.status) &&
     (value.detailsUrl === undefined || typeof value.detailsUrl === "string") &&

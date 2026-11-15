@@ -38,7 +38,7 @@ export function useGamesCatalog(locale: Locale) {
     const order = [
       "pirate-tabletop",
       "saper-last-mistake",
-      "vlastitel-galaktiki",
+      "tyaga-k-nebu",
     ];
     const priority = (slug: string) =>
       order.includes(slug) ? order.indexOf(slug) : order.length;
