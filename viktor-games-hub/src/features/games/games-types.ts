@@ -1,10 +1,11 @@
-export type GameStatus = "published" | "alpha" | "development" | "prototype" | "planned";
+export type GameStatus = "published" | "alpha" | "development" | "prototype" | "planned" | "announced";
 
 export type GamesCatalogSource = "api" | "fallback";
 
 export interface Game {
   slug: string;
   title: string;
+  subtitle?: string;
   description: string;
   playUrl?: string;
   status: GameStatus;

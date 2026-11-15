@@ -24,14 +24,15 @@ export function GameStation({
   onDetails,
 }: Props) {
   const saper = game.slug === "saper-last-mistake";
-  const galaxy = game.slug === "vlastitel-galaktiki";
+  const announced = game.status === "announced";
+  const posterHasTitle = game.slug === "tyaga-k-nebu";
   const [title, subtitle] = saper ? game.title.split(": ") : [game.title, ""];
-  const status = galaxy
+  const status = game.status === "prototype"
     ? copy.prototype
     : game.status === "alpha"
       ? copy.alpha
       : copy.browser;
-  const theme = saper ? "cyan" : galaxy ? "violet" : "pink";
+  const theme = saper ? "cyan" : posterHasTitle ? "ember" : "pink";
 
   return (
     <article
@@ -62,8 +63,10 @@ export function GameStation({
           <span className="screen-shade" />
         </button>
         <div className="station-copy">
-          <h2 id={`${game.slug}-title`}>{title}</h2>
-          <p className="station-subtitle">{subtitle || status}</p>
+          <h2 className={posterHasTitle ? "sr-only" : undefined} id={`${game.slug}-title`}>{title}</h2>
+          {!announced && (
+            <p className="station-subtitle">{game.subtitle || subtitle || status}</p>
+          )}
           <div className="station-actions">
             {game.playUrl ? (
               <a
@@ -78,7 +81,7 @@ export function GameStation({
                 </svg>
               </a>
             ) : (
-              <span className="development-status">{copy.inDevelopment}</span>
+              <span className="development-status">{announced ? copy.announced : copy.inDevelopment}</span>
             )}
             <button
               type="button"

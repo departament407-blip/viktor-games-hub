@@ -27,6 +27,7 @@ export function GameDetails({
     <dialog
       ref={ref}
       className="game-dialog"
+      data-slug={game.slug}
       aria-labelledby="detail-title"
       onClose={onClose}
       onClick={(event) => {
@@ -63,7 +64,7 @@ export function GameDetails({
               {copy.play} <span aria-hidden="true">↗</span>
             </a>
           ) : (
-            <p className="development-status">{copy.inDevelopment}</p>
+            <p className="development-status">{game.status === "announced" ? copy.announced : copy.inDevelopment}</p>
           )}
         </div>
       </div>
